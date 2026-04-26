@@ -1,0 +1,22 @@
+{% extends "rentals/base.html" %}
+{% block content %}
+
+<h2>Booking Calendar for {{ villa.name }}</h2>
+
+<p><strong>Reference:</strong> {{ villa.reference_number }}</p>
+
+<h3>Booked Dates:</h3>
+
+{% if booked_dates %}
+    <ul>
+        {% for d in booked_dates %}
+        <li>{{ d }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No dates booked for this villa.</p>
+{% endif %}
+
+<a href="{% url 'admin_bookings' %}">Back to All Bookings</a>
+
+{% endblock %}

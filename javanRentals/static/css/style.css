@@ -1,0 +1,284 @@
+/* ============================================================
+   JAVAN RENTALS — style.css
+   ============================================================ */
+
+/* ── BASE ─────────────────────────────────────────────────── */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: url("../images/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: rgb(0, 0, 0);
+}
+
+.container {
+    width: 90%;
+    margin: 20px auto;
+}
+
+/* ── NAVBAR ───────────────────────────────────────────────── */
+.navbar {
+    background-color: #3949ab;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+}
+
+.navbar img {
+    height: 55px;
+}
+
+.nav-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+}
+
+.nav-center a {
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-right a {
+    margin-left: 15px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.welcome-text {
+    color: white;
+    margin-right: 10px;
+}
+
+/* ── GLOBAL BUTTON ────────────────────────────────────────── */
+.btn {
+    display: inline-block;
+    padding: 10px 22px;
+    background-color: #3f51b5;
+    color: #ffffff !important;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none !important;
+    cursor: pointer;
+    margin: 4px;
+    transition: background 0.2s, transform 0.15s;
+}
+
+.btn:hover {
+    background-color: #2c3a9e;
+    transform: translateY(-1px);
+}
+
+/* ── HOME PAGE ────────────────────────────────────────────── */
+.home-title {
+    text-align: center;
+    font-size: 48px;
+    font-weight: bold;
+    margin-top: 40px;
+    color: white;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.action-buttons {
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* ── VILLA CARDS ──────────────────────────────────────────── */
+.villa-card {
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.villa-card h3 {
+    margin: 0 0 6px;
+    color: #1a1a2e;
+}
+
+.villa-card img {
+    border-radius: 8px;
+    margin-top: 8px;
+    max-width: 100%;
+}
+
+.view-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 18px;
+    background-color: #3f51b5;
+    color: white !important;
+    border-radius: 6px;
+    text-decoration: none !important;
+    font-weight: 600;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.view-button:hover {
+    background-color: #2c3a9e;
+}
+
+/* ── AUTH PAGES (login / signup) ──────────────────────────── */
+.auth-wrapper {
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+
+/* ── NAV BUTTONS ──────────────────────────────────────────── */
+.btn-login,
+.btn-signup,
+.btn-logout {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none !important;
+    transition: background 0.2s;
+}
+
+.btn-login {
+    background: rgba(255, 255, 255, 0.15);
+    color: white !important;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.btn-login:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.btn-signup {
+    background: white;
+    color: #3f51b5 !important;
+}
+
+.btn-signup:hover {
+    background: #e8eaf6;
+}
+
+.btn-logout {
+    background: rgba(255, 255, 255, 0.15);
+    color: white !important;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.btn-logout:hover {
+    background: rgba(255, 80, 80, 0.35);
+}
+
+/* ── FORMS (booking, contact, review) ────────────────────── */
+.form-wrapper {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    padding: 28px 32px;
+    max-width: 520px;
+    margin: 40px auto;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
+}
+
+.form-wrapper h2 {
+    margin-bottom: 20px;
+    color: #1a1a2e;
+}
+
+.form-wrapper input,
+.form-wrapper select,
+.form-wrapper textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 14px;
+    box-sizing: border-box;
+    background: #fafafa;
+    transition: border-color 0.2s;
+}
+
+.form-wrapper input:focus,
+.form-wrapper select:focus,
+.form-wrapper textarea:focus {
+    outline: none;
+    border-color: #3f51b5;
+}
+
+/* ── TABLES (my bookings) ─────────────────────────────────── */
+.booking-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.booking-table th {
+    background-color: #3f51b5;
+    color: white;
+    padding: 12px 16px;
+    text-align: left;
+}
+
+.booking-table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid #eeeeee;
+    color: #333;
+}
+
+.booking-table tr:last-child td {
+    border-bottom: none;
+}
+
+.booking-table tr:hover td {
+    background: #f0f4ff;
+}
+
+/* ── MISC ─────────────────────────────────────────────────── */
+.content {
+    padding: 30px;
+}
+
+.messages {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.messages li {
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.messages .success { background: #eafaf1; color: #1e8449; border: 1px solid #a9dfbf; }
+.messages .error   { background: #fff3f3; color: #c0392b; border: 1px solid #fcc;    }
+.messages .info    { background: #eaf4fb; color: #1a5276; border: 1px solid #aed6f1; }

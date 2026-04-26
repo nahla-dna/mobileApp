@@ -1,0 +1,119 @@
+{% extends "rentals/base.html" %}
+
+{% block content %}
+
+<style>
+    .bookings-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .booking-card {
+        width: 85%;
+        max-width: 900px;
+        background: rgba(255, 255, 255, 0.88);
+        backdrop-filter: blur(6px);
+        padding: 20px;
+        margin-bottom: 25px;
+        border-radius: 12px;
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+        animation: fadeIn 0.5s ease-in-out;
+        display: flex;
+        gap: 20px;
+    }
+
+
+    .booking-image {
+        width: 260px;
+        height: 170px;
+        border-radius: 10px;
+        object-fit: cover;
+        border: 2px solid #fff;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .booking-details {
+        flex-grow: 1;
+    }
+
+    .booking-details h3 {
+        font-size: 24px;
+        color: #222;
+        margin-bottom: 5px;
+    }
+
+    .booking-details p {
+        margin: 4px 0;
+        color: #333;
+        font-size: 16px;
+    }
+
+    .cancel-btn {
+        margin-top: 12px;
+        padding: 10px 18px;
+        font-size: 15px;
+        border: none;
+        border-radius: 6px;
+        background: #ff4a4a;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+        transition: 0.25s;
+    }
+
+    .cancel-btn:hover {
+        background: #d93636;
+    }
+
+    .empty-message {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 25px 40px;
+        border-radius: 12px;
+        font-size: 20px;
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.25);
+        margin-top: 40px;
+    }
+
+</style>
+
+<div class="bookings-container">
+    <h1>Your Bookings</h1>
+
+    {% if bookings %}
+        {% for booking in bookings %}
+            <div class="booking-card">
+
+                {% if booking.villa.main_image %}
+                    <img src="{{ booking.villa.main_image.url }}" class="booking-image">
+                {% endif %}
+
+                <div class="booking-details">
+                    <h3>{{ booking.villa.name }}</h3>
+
+                    <p><strong>Location:</strong> {{ booking.villa.location }}</p>
+                    <p><strong>Stay From:</strong> {{ booking.start_date }}</p>
+                    <p><strong>To:</strong> {{ booking.end_date }}</p>
+                    <p><strong>Price per Night:</strong> Rs {{ booking.villa.price_per_night }}</p>
+
+                    <p><strong>Guest:</strong> {{ booking.guest_name }}</p>
+                    <p><strong>Email:</strong> {{ booking.guest_email }}</p>
+
+                    <a href="{% url 'cancel_booking' booking.id %}">
+                    <button class="cancel-btn">Cancel Booking</button>
+                    </a>
+                </div>
+
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="empty-message">
+            You have no bookings yet.
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

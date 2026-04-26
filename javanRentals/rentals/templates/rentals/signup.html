@@ -1,0 +1,224 @@
+{% extends "rentals/base.html" %}
+{% block content %}
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@600&display=swap');
+
+  .auth-wrapper {
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    background: transparent;
+  }
+
+  .auth-card {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.14);
+    width: 100%;
+    max-width: 460px;
+    overflow: hidden;
+    font-family: 'DM Sans', sans-serif;
+    animation: slideUp 0.4s ease;
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .auth-header {
+    background: linear-gradient(135deg, #2c3a9e 0%, #3F51B5 100%);
+    padding: 2.2rem 2rem 1.8rem;
+    text-align: center;
+    color: #fff;
+  }
+
+  .auth-header .brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.25rem;
+  }
+
+  .auth-header .subtitle {
+    font-size: 0.82rem;
+    opacity: 0.7;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .auth-body {
+    padding: 2rem 2rem 1.5rem;
+  }
+
+  .auth-body h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.45rem;
+    color: #3f51b5;
+    margin-bottom: 0.4rem;
+  }
+
+  .auth-body .tagline {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 1.5rem;
+  }
+
+  .field-group {
+    margin-bottom: 1.1rem;
+  }
+
+  .field-group label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #555;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+
+  .field-group input {
+    width: 100%;
+    padding: 0.72rem 1rem;
+    border: 1.5px solid #e2e2e2;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    color: #222;
+    background: #fafafa;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    box-sizing: border-box;
+  }
+
+  .field-group input:focus {
+    outline: none;
+    border-color: #3F51B5;
+    box-shadow: 0 0 0 3px rgba(61, 44, 141, 0.1);
+    background: #fff;
+  }
+
+  .field-hint {
+    font-size: 0.78rem;
+    color: #999;
+    margin-top: 0.3rem;
+    line-height: 1.4;
+  }
+
+  .errorlist {
+    list-style: none;
+    padding: 0;
+    margin: 0.3rem 0 0;
+  }
+
+  .errorlist li {
+    font-size: 0.8rem;
+    color: #e05c5c;
+  }
+
+  .row-two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+  }
+
+  .btn-signup {
+    width: 100%;
+    padding: 0.8rem;
+    background: linear-gradient(135deg, #2c3a9e, #3f51b5);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: opacity 0.2s, transform 0.15s;
+    margin-top: 0.4rem;
+  }
+
+  .btn-signup:hover {
+    opacity: 0.92;
+    transform: translateY(-1px);
+  }
+
+  .auth-footer {
+    text-align: center;
+    padding: 1rem 2rem 1.6rem;
+    font-size: 0.85rem;
+    color: #777;
+    border-top: 1px solid #f0f0f0;
+  }
+
+  .auth-footer a {
+    color: #3f51b5;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .auth-footer a:hover { text-decoration: underline; }
+</style>
+
+<div class="auth-wrapper">
+  <div class="auth-card">
+
+    <div class="auth-header">
+      <div class="brand">🏡 Javan Rentals</div>
+      <div class="subtitle">Luxury Villa Experience</div>
+    </div>
+
+    <div class="auth-body">
+      <h2>Create your account</h2>
+      <p class="tagline">Join thousands of guests enjoying premium villas.</p>
+
+      <form method="post">
+        {% csrf_token %}
+
+        <div class="field-group">
+          <label for="id_username">Username</label>
+          <input type="text" name="username" id="id_username"
+                 value="{{ form.username.value|default:'' }}" autocomplete="username" autofocus>
+          <div class="field-hint">150 characters or fewer. Letters, digits and @/./+/-/_ only.</div>
+          {{ form.username.errors }}
+        </div>
+
+        <div class="field-group">
+          <label for="id_email">Email address</label>
+          <input type="email" name="email" id="id_email"
+                 value="{{ form.email.value|default:'' }}" autocomplete="email">
+          {{ form.email.errors }}
+        </div>
+
+        <div class="row-two">
+          <div class="field-group">
+            <label for="id_password1">Password</label>
+            <input type="password" name="password1" id="id_password1" autocomplete="new-password">
+            {{ form.password1.errors }}
+          </div>
+          <div class="field-group">
+            <label for="id_password2">Confirm password</label>
+            <input type="password" name="password2" id="id_password2" autocomplete="new-password">
+            {{ form.password2.errors }}
+          </div>
+        </div>
+
+        <div class="field-hint" style="margin-bottom:1rem;">
+          Min. 8 characters · Not entirely numeric · Not too similar to username
+        </div>
+
+        <button type="submit" class="btn-signup">Create Account</button>
+      </form>
+    </div>
+
+    <div class="auth-footer">
+      Already have an account? <a href="{% url 'login' %}">Log in</a>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

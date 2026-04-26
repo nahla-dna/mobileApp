@@ -1,0 +1,31 @@
+{% extends "rentals/base.html" %}
+{% block content %}
+
+<h2>All Bookings</h2>
+
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Villa</th>
+        <th>Guest</th>
+        <th>Email</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Action</th>
+    </tr>
+
+    {% for b in bookings %}
+    <tr>
+        <td>{{ b.villa.name }}</td>
+        <td>{{ b.guest_name }}</td>
+        <td>{{ b.guest_email }}</td>
+        <td>{{ b.start_date }}</td>
+        <td>{{ b.end_date }}</td>
+        <td>
+            <a href="{% url 'admin_cancel_booking' b.id %}">Cancel</a>
+            <a href="{% url 'villa_calendar' b.villa.id %}">View Calendar</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

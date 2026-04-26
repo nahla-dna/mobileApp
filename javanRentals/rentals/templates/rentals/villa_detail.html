@@ -1,0 +1,111 @@
+{% extends "rentals/base.html" %}
+{% block content %}
+
+<div class="form-wrapper" style="max-width: 700px;">
+
+    <h1>{{ villa.name }}</h1>
+
+    <p><strong>Reference:</strong> {{ villa.reference_number }}</p>
+    <p><strong>Location:</strong> {{ villa.location }}</p>
+    <p><strong>Price per night:</strong> Rs {{ villa.price_per_night }}</p>
+    <p><strong>Rooms:</strong> {{ villa.number_of_rooms }}</p>
+    <p><strong>Max guests:</strong> {{ villa.max_guests }}</p>
+
+    {% if villa.main_image %}
+        <img src="{{ villa.main_image.url }}" width="400" style="border-radius:8px; margin-top:10px;">
+    {% endif %}
+
+    <hr>
+
+    <!-- REVIEWS SECTION -->
+    <h2>Reviews</h2>
+
+    <button id="toggle-reviews" class="btn">Show / Hide Reviews</button>
+
+    <div id="reviews-section" style="display:none; margin-top:14px;">
+
+        {% if avg_rating %}
+            <h3>Average Rating: {{ avg_rating|floatformat:1 }} / 5 ⭐</h3>
+        {% else %}
+            <p>No ratings yet.</p>
+        {% endif %}
+
+        <div id="reviews-list">
+            {% if reviews %}
+                {% for r in reviews %}
+                    <div class="review">
+                        <p><strong>{{ r.user.username }}</strong> — Rated {{ r.rating }}/5 ⭐</p>
+                        <p>{{ r.comment }}</p>
+                        <hr>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No reviews yet.</p>
+            {% endif %}
+        </div>
+
+    </div>
+
+    <hr>
+
+    <!-- REVIEW FORM (AJAX) -->
+    {% if user.is_authenticated %}
+        <h3>Leave a Review</h3>
+
+        <form id="review-form" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn">Submit Review</button>
+        </form>
+
+        <div id="success-message" style="color: green; margin-top: 10px;"></div>
+
+    {% else %}
+        <p>You must <a href="{% url 'login' %}" class="btn" style="font-size:13px; padding:6px 14px;">Login</a> to leave a review.</p>
+    {% endif %}
+
+    <hr>
+
+    <a href="{% url 'book_villa' villa.id %}" class="btn">⭐ Book Now</a>
+
+</div>
+
+<!-- JQUERY + AJAX -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+    // Toggle reviews
+    $("#toggle-reviews").click(function () {
+        $("#reviews-section").toggle();
+    });
+
+    // AJAX review submission
+    $("#review-form").submit(function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: "",
+            type: "POST",
+            data: $(this).serialize(),
+
+            success: function (response) {
+                $("#success-message").text("Review added successfully! ✅");
+
+                $("#reviews-list").append(
+                    "<div class='review'>" +
+                    "<p><strong>" + response.username + "</strong> — Rated " + response.rating + "/5 ⭐</p>" +
+                    "<p>" + response.comment + "</p><hr></div>"
+                );
+
+                $("#review-form")[0].reset();
+            },
+
+            error: function () {
+                alert("Error submitting review.");
+            }
+        });
+    });
+
+</script>
+
+{% endblock %}

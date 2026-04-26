@@ -1,0 +1,41 @@
+{% extends "rentals/base.html" %}
+
+{% block content %}
+
+<h1 class="home-title">Welcome to Javan Rentals</h1>
+
+<div class="action-buttons">
+    <form action="{% url 'search' %}" method="GET" style="display:inline;">
+        <input type="text" name="q" placeholder="Search villas..." required>
+        <button type="submit" class="btn">🔍 Search Villa</button>
+    </form>
+
+    <a href="{% url 'featured_villas' %}" class="btn">⭐ Book Now</a>
+    <a href="{% url 'filter' %}" class="btn">Filter Villas</a>
+    <a href="{% url 'all_villas' %}" class="btn">🌴 Discover More</a>
+    <a href="{% url 'contact' %}" class="btn">📩 Contact Us</a>
+    <a href="{% url 'faq' %}" class="btn">📘 FAQ</a>
+</div>
+
+<h2 style="margin-top: 30px;">Featured Villas</h2>
+
+{% if featured %}
+    {% for v in featured %}
+        <div class="villa-card">
+            <h3>{{ v.name }}</h3>
+            <p>{{ v.location }}</p>
+            <p>Rs {{ v.price_per_night }}</p>
+
+            {% if v.main_image %}
+                <img src="{{ v.main_image.url }}" width="250">
+            {% endif %}
+
+            <br><br>
+            <a href="{% url 'villa_detail' v.id %}" class="view-button">View Details</a>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No featured villas available.</p>
+{% endif %}
+
+{% endblock %}

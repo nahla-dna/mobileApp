@@ -1,0 +1,23 @@
+{% extends "rentals/base.html" %}
+
+{% block content %}
+<h2>Booking for {{ villa.name }}</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit" class="btn-book">Confirm Booking</button>
+</form>
+
+<style>
+.btn-book {
+    background: green;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+</style>
+
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block title %}About Us - Javan Rentals{% endblock %}
+
+{% block content %}
+<section class="about-section">
+    <div class="about-content">
+        <h2>About us</h2>
+        <br>
+        <p>Javan Rentals was founded in 2025 with a simple mission: 
+            to make property renting easier, faster, and more 
+            accessible for everyone. What began as a small idea 
+            to help local homeowners list their spaces online has 
+            grown into a user-friendly platform trusted by both 
+            hosts and guests. From its early days, the company 
+            focused on offering a seamless booking experience, 
+            transparent communication, and a modern approach to 
+            property rentals. Today, Javan Rentals continues to 
+            expand while staying true to its goal of simplifying
+             the way people find comfortable and reliable places to stay.</p>
+        
+        <!-- Image Slideshow -->
+        <div class="slideshow-container">
+            <div class="slide fade">
+                <img src="{% static 'image/property1.jpg' %}" alt="Property 1">
+            </div>
+            <div class="slide fade">
+                <img src="{% static 'image/property2.jpg' %}" alt="Property 2">
+            </div>
+            <div class="slide fade">
+                <img src="{% static 'image/property3.jpg' %}" alt="Property 3">
+            </div>
+            <div class="slide fade">
+                <img src="{% static 'image/property4.jpg' %}" alt="Property 4">
+            </div>
+            
+            <!-- Navigation dots -->
+            <div class="dots-container">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+                <span class="dot" onclick="currentSlide(4)"></span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    let slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+        let slides = document.getElementsByClassName("slide");
+        let dots = document.getElementsByClassName("dot");
+        
+        // Hide all slides
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        
+        slideIndex++;
+        
+        // Reset to first slide if we've gone past the last one
+        if (slideIndex > slides.length) {
+            slideIndex = 1;
+        }
+        
+        // Remove active class from all dots
+        for (let i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        
+        // Show current slide and activate corresponding dot
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        
+        // Change image every 3 seconds (3000 milliseconds)
+        setTimeout(showSlides, 3000);
+    }
+
+    function currentSlide(n) {
+        slideIndex = n - 1;
+        showSlides();
+    }
+</script>
+{% endblock %}

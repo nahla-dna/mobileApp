@@ -1,0 +1,224 @@
+{% extends 'home.html' %}
+
+{% block title %}Sign Up - Javan Rentals{% endblock %}
+
+{% block content %}
+<!-- Login Container -->
+<div class="login-container">
+    <div class="login-box">
+        <div class="login-header">SIGN UP</div>
+        <form method="POST" id="signupForm">
+            {% csrf_token %}
+            
+            <!-- Username Field with Tooltip -->
+            <div class="form-group">
+                <label for="id_username">Username:</label>
+                <div class="input-wrapper">
+                    {{ form.username }}
+                    <div class="tooltip">
+                        <h4>Username Requirements:</h4>
+                        <ul>
+                            <li>Required. 150 characters or fewer</li>
+                            <li>Letters, digits and @,.,+,- and _ only</li>
+                        </ul>
+                    </div>
+                </div>
+                {% if form.username.errors %}
+                    <div class="field-errors">
+                        {% for error in form.username.errors %}
+                            <p class="error-message">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <!-- First Name Field -->
+<div class="form-group">
+    <label for="id_first_name">First Name:</label>
+    <div class="input-wrapper">
+        {{ form.first_name }}
+        <div class="tooltip">
+            <h4>First Name:</h4>
+            <ul>
+                <li>Required. 30 characters or fewer</li>
+                <li>Your first name</li>
+            </ul>
+        </div>
+    </div>
+    {% if form.first_name.errors %}
+        <div class="field-errors">
+            {% for error in form.first_name.errors %}
+                <p class="error-message">{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+<!-- Last Name Field -->
+<div class="form-group">
+    <label for="id_last_name">Last Name:</label>
+    <div class="input-wrapper">
+        {{ form.last_name }}
+        <div class="tooltip">
+            <h4>Last Name:</h4>
+            <ul>
+                <li>Required. 30 characters or fewer</li>
+                <li>Your family name</li>
+            </ul>
+        </div>
+    </div>
+    {% if form.last_name.errors %}
+        <div class="field-errors">
+            {% for error in form.last_name.errors %}
+                <p class="error-message">{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+            <!-- Email Field with Tooltip -->
+            <div class="form-group">
+                <label for="id_email">Email:</label>
+                <div class="input-wrapper">
+                    <input type="email" name="email" id="id_email" required value="{{ email }}">
+                    <div class="tooltip">
+                        <h4>Email Requirements:</h4>
+                        <ul>
+                            <li>Required. Enter a valid email address</li>
+                            <li>Must be unique - no duplicate emails allowed</li>
+                            <li>Can be used to login to your account</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Password Field with Toggle and Strength Meter -->
+            <div class="form-group">
+                <label for="id_password1">Password:</label>
+                <div class="input-wrapper" style="position: relative;">
+                    <span class="input-icon">🔒</span>
+                    <div class="password-wrapper">
+                        {{ form.password1 }}
+                        <span class="password-toggle" onclick="togglePassword('id_password1', this)">👁️</span>
+                    </div>
+                    <div class="tooltip">
+                        <h4>Password Requirements:</h4>
+                        <ul>
+                            <li>Your password can't be too similar to your other personal information</li>
+                            <li>Your password must contain at least 8 characters</li>
+                            <li>Your password can't be a commonly used password</li>
+                            <li>Your password can't be entirely numeric</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Password Strength Meter -->
+                <div class="strength-meter">
+                    <div class="strength-meter-fill" id="strengthMeter"></div>
+                </div>
+                <div class="strength-text" id="strengthText"></div>
+                
+                {% if form.password1.errors %}
+                    <div class="field-errors">
+                        {% for error in form.password1.errors %}
+                            <p class="error-message">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Password Confirmation Field with Toggle -->
+            <div class="form-group">
+                <label for="id_password2">Password confirmation:</label>
+                <div class="input-wrapper" style="position: relative;">
+                    <span class="input-icon">🔒</span>
+                    <div class="password-wrapper">
+                        {{ form.password2 }}
+                        <span class="password-toggle" onclick="togglePassword('id_password2', this)">👁️</span>
+                    </div>
+                    <div class="tooltip">
+                        <h4>Password Confirmation:</h4>
+                        <ul>
+                            <li>Enter the same password as before, for verification</li>
+                        </ul>
+                    </div>
+                </div>
+                {% if form.password2.errors %}
+                    <div class="field-errors">
+                        {% for error in form.password2.errors %}
+                            <p class="error-message">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <button type="submit" class="signup-btn" id="submitBtn">Submit</button>
+            <p class="login-prompt">
+                Already have an account? <a href="{% url 'base:login' %}">Log In</a>
+            </p>
+            <a href="{% url 'base:home' %}" class="back-btn-style-me">Back</a>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Password visibility toggle
+    function togglePassword(fieldId, icon) {
+        const field = document.getElementById(fieldId);
+        if (field.type === 'password') {
+            field.type = 'text';
+            icon.textContent = '🙈';
+        } else {
+            field.type = 'password';
+            icon.textContent = '👁️';
+        }
+    }
+
+    // Password strength meter
+    const password1 = document.getElementById('id_password1');
+    const strengthMeter = document.getElementById('strengthMeter');
+    const strengthText = document.getElementById('strengthText');
+
+    if (password1) {
+        password1.addEventListener('input', function() {
+            const password = this.value;
+            let strength = 0;
+            
+            if (password.length >= 8) strength++;
+            if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength++;
+            if (password.match(/[0-9]/)) strength++;
+            if (password.match(/[^a-zA-Z0-9]/)) strength++;
+            
+            strengthMeter.className = 'strength-meter-fill';
+            
+            if (strength === 0 || password.length === 0) {
+                strengthMeter.style.width = '0%';
+                strengthText.textContent = '';
+            } else if (strength <= 2) {
+                strengthMeter.classList.add('strength-weak');
+                strengthText.textContent = 'Weak password';
+                strengthText.style.color = '#ff4757';
+            } else if (strength === 3) {
+                strengthMeter.classList.add('strength-medium');
+                strengthText.textContent = 'Medium password';
+                strengthText.style.color = '#ffa502';
+            } else {
+                strengthMeter.classList.add('strength-strong');
+                strengthText.textContent = 'Strong password';
+                strengthText.style.color = '#26de81';
+            }
+        });
+    }
+
+    // Form submission with loading state
+    const form = document.getElementById('signupForm');
+    const submitBtn = document.getElementById('submitBtn');
+    
+    if (form && submitBtn) {
+        form.addEventListener('submit', function() {
+            submitBtn.disabled = true;
+            submitBtn.classList.add('loading');
+            submitBtn.textContent = 'Creating Account...';
+        });
+    }
+
+    // Auto-focus first input
+    document.getElementById('id_username')?.focus();
+</script>
+{% endblock %}
