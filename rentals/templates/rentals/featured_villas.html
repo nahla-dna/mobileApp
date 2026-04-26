@@ -1,0 +1,70 @@
+{% extends "rentals/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<h2 style="text-align:center; margin-top:20px;">Book your dream stay in Mauritius!</h2>
+
+{% if featured_villas %}
+<div class="villa-grid">
+    {% for villa in featured_villas %}
+    <div class="villa-card">
+        
+        {% if villa.main_image %}
+            <img src="{{ villa.main_image.url }}" alt="{{ villa.name }}">
+        {% else %}
+            <img src="{% static 'images/no-image.jpg' %}" alt="No Image">
+        {% endif %}
+
+        <h3>{{ villa.name }}</h3>
+        <p><strong>Rs {{ villa.price_per_night }}</strong> / night</p>
+
+        <a class="btn-view" href="{% url 'villa_detail' villa.id %}">
+            View Villa
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+{% else %}
+<p style="text-align:center; margin-top:20px;">No featured villas available yet.</p>
+{% endif %}
+
+<style>
+.villa-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 30px;
+}
+
+.villa-card {
+    background: rgba(255, 255, 255, 0.90);
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.villa-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.btn-view {
+    display: inline-block;
+    padding: 8px 15px;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+}
+.btn-view:hover {
+    background: #0056b3;
+}
+</style>
+
+{% endblock %}

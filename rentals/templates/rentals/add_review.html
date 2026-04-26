@@ -1,0 +1,16 @@
+
+{% extends 'rentals/base.html' %}
+{% block content %}
+
+<h2>Leave a Review for {{ villa.name }}</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit" class="btn btn-success">Submit Review</button>
+</form>
+
+<a href="{% url 'villa_detail' villa.id %}">Back to Villa</a>
+
+{% endblock %}

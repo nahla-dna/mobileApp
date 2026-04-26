@@ -1,0 +1,15 @@
+{% extends "rentals/base.html" %}
+{% block content %}
+
+<h2>Cancel Booking</h2>
+
+<p>Are you sure you want to cancel your booking for
+<strong>{{ booking.villa.name }}</strong>?</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Confirm Cancellation</button>
+    <a href="{% url 'my_bookings' %}" class="btn btn-secondary">Back</a>
+</form>
+
+{% endblock %}
