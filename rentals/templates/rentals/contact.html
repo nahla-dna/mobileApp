@@ -1,0 +1,78 @@
+{% extends "rentals/base.html" %}
+
+{% block content %}
+
+<style>
+.contact-container {
+    width: 40%;
+    margin: 40px auto;
+    background: rgba(255,255,255,0.9);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.contact-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2e2e2e;
+}
+
+.contact-container input,
+.contact-container textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: 1px solid #aaa;
+    font-size: 15px;
+}
+
+.contact-container button {
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #2e5ae8;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.contact-container button:hover {
+    background: #1e44b3;
+}
+
+.success-msg {
+    text-align: center;
+    padding: 12px;
+    background: #d4ffd4;
+    border-left: 5px solid #2aa22a;
+    color: #1f7a1f;
+    margin-bottom: 15px;
+}
+</style>
+
+<div class="contact-container">
+    <h2>Contact Us</h2>
+
+    {% if messages %}
+        {% for msg in messages %}
+            <div class="success-msg">{{ msg }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.name }}
+        {{ form.email }}
+        {{ form.message }}
+
+        <button type="submit">Send Message</button>
+    </form>
+</div>
+
+{% endblock %}
+
