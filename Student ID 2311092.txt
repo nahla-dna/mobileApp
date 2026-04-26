@@ -1,0 +1,8 @@
+Made changes in the following folders for Authentication (Login/Logout)
+mobile_app.py
+rentals/urls.py
+rentals/forms.py
+rentals/views.py
+auth/register.py
+auth/login.py
+javan/settings.py
