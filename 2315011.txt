@@ -1,0 +1,100 @@
+================================================================
+TEAM MEMBER CONTRIBUTION — [YOUR NAME]
+Javan Rentals Project — Semester 2
+================================================================
+
+----------------------------------------------------------------
+1. MY INDIVIDUAL CONTRIBUTION
+----------------------------------------------------------------
+
+My contribution focused on the Search and Filter functionality
+of the Javan Rentals mobile application, along with real-time
+API consumption and CRUD operations via Django REST Framework.
+
+Specifically I worked on:
+
+- Built a new REST API endpoint (/api/search/) in Django that
+  accepts filter parameters and returns JSON results
+
+- Implemented the apply_filters() function in the mobile app to
+  make real API calls on every keystroke instead of filtering
+  client-side — this is real-time API consumption
+
+- Added on_change event handlers to all filter input fields
+  (search, location, min price, max price) for live filtering
+
+- Separated build_cards() from display_villas() to fix a focus
+  bug where the cursor would jump back to the first input field
+  on every keystroke
+
+- Added window_resizable support to the mobile app
+
+- Demonstrated full CRUD operations via Django REST Framework
+  (Create, Read, Update, Delete) on the Villa model
+
+
+----------------------------------------------------------------
+2. WHERE TO FIND MY CODE
+----------------------------------------------------------------
+
+FILE 1: mobile_app.py
+  - apply_filters() function — real-time API consumption
+  - build_cards() function — separated card builder
+  - display_villas() function — refactored UI builder
+  - Input fields defined with on_change event handlers
+  - villa_list_view shared reference (defined near input fields)
+  - page.window_resizable = True (inside main function)
+
+FILE 2: rentals/views.py
+  - ajax_search() function — scroll to the bottom of the file
+  - This is the JSON-producing endpoint the mobile app calls
+
+FILE 3: rentals/urls.py
+  - path('api/search/', views.ajax_search, name='ajax_search')
+  - Added at the bottom of the urlpatterns list
+
+
+----------------------------------------------------------------
+3. HOW TO SET UP AND RUN THE PROJECT
+----------------------------------------------------------------
+
+REQUIREMENTS:
+- Python 3.10 or higher
+- Windows / Mac / Linux
+
+STEP 1 — Navigate to the project folder:
+  cd "javanRentals - Copy"
+
+STEP 2 — Delete the existing venv if present:
+  Windows:   Remove-Item -Recurse -Force venv
+  Mac/Linux: rm -rf venv
+
+STEP 3 — Create a fresh virtual environment:
+  python -m venv venv
+  (or: py -m venv venv on Windows)
+
+STEP 4 — Activate the virtual environment:
+  Windows:   .\venv\Scripts\activate
+  Mac/Linux: source venv/bin/activate
+
+STEP 5 — Install dependencies:
+  pip install django djangorestframework flet requests pillow
+
+STEP 6 — Apply database migrations:
+  python manage.py migrate
+
+STEP 7 — Create a superuser to log in:
+  python manage.py createsuperuser
+  (follow the prompts to set username and password)
+
+STEP 8 — Start the Django server (keep this terminal open):
+  python manage.py runserver
+
+STEP 9 — Open a second terminal, activate venv, then run app:
+  .\venv\Scripts\activate
+  python mobile_app.py
+
+STEP 10 — Log in using the superuser credentials you created.
+
+NOTE: The Django server must be running before launching the
+mobile app, as the app depends on the API at 127.0.0.1:8000
