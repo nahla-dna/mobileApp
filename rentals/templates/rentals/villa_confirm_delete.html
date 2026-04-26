@@ -1,0 +1,13 @@
+{% extends 'rentals/base.html' %}
+{% block content %}
+<h2>Delete Villa</h2>
+
+<p>Are you sure you want to delete <strong>{{ villa.name }}</strong>?</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit">Yes, delete</button>
+</form>
+
+<a href="{% url 'all_villas' %}">Cancel</a>
+{% endblock %}

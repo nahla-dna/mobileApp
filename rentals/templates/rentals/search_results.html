@@ -1,0 +1,44 @@
+{% extends "rentals/base.html" %}
+
+{% block content %}
+
+<h2>Search Results</h2>
+
+{% if villas %}
+    <div class="villa-container">
+        {% for villa in villas %}
+            <div class="villa-card">
+
+                {% if villa.main_image %}
+                    <img src="{{ villa.main_image.url }}" width="250">
+                {% endif %}
+
+                <h3>{{ villa.name }}</h3>
+                <p>{{ villa.location }}</p>
+                <p>Rs {{ villa.price_per_night }} / night</p>
+
+                <!-- ✅ SHOW DETAILS BUTTON -->
+                <a href="{% url 'villa_detail' villa.id %}">
+                    <button>View Details</button>
+                </a>
+
+                <!-- ✅ BOOK BUTTON -->
+                {% if user.is_authenticated %}
+                    <a href="{% url 'book_villa' villa.id %}">
+                        <button>Book Now</button>
+                    </a>
+                {% else %}
+                    <a href="{% url 'login' %}">
+                        <button>Login to Book</button>
+                    </a>
+                {% endif %}
+
+            </div>
+        {% endfor %}
+    </div>
+
+{% else %}
+    <p>No villas found.</p>
+{% endif %}
+
+{% endblock %}

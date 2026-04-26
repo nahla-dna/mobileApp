@@ -1,0 +1,170 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: url("../images/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: rgb(0, 0, 0);
+}
+
+/* NAVBAR */
+.navbar {
+    background-color: #3949ab;
+    padding: 15px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Left: Logo */
+.nav-left {
+    display: flex;
+    align-items: center;
+}
+
+/* Center: Navigation Links */
+.nav-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+}
+
+/* Right: User icons */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.navbar img {
+    height: 55px;
+}
+
+.content {
+    padding: 30px;
+}
+
+/* Home Page Title */
+.home-title {
+    text-align: center;
+    font-size: 48px;
+    font-weight: bold;
+    margin-top: 40px;
+    color: white;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+}
+
+/* Center big buttons */
+.button-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 40px;
+    gap: 20px;
+}
+
+/* Glassy buttons */
+.action-btn {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 18px 40px;
+    border-radius: 14px;
+    font-size: 22px;
+    font-weight: 600;
+    text-decoration: none;
+    color: white;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.45);
+    transition: 0.25s ease-in-out;
+}
+
+/* Hover animation */
+.action-btn:hover {
+    background: rgba(255, 255, 255, 0.28);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.6);
+}
+
+/* Homepage title */
+.home-title {
+    text-align: center;
+    font-size: 48px;
+    font-weight: bold;
+    margin-top: 40px;
+    color: white;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+}
+
+/* ------------------ NICE BUTTONS ------------------ */
+.action-buttons {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.action-buttons a,
+.action-buttons button {
+    display: inline-block;
+    padding: 12px 22px;
+    margin: 8px;
+    font-size: 17px;
+    font-weight: 600;
+    color: white;
+    background: rgba(0, 0, 0, 0.55);
+    border: 2px solid white;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.3s;
+    backdrop-filter: blur(6px);
+}
+
+.action-buttons a:hover,
+.action-buttons button:hover {
+    background: white;
+    color: #333;
+    border-color: #555;
+    transform: scale(1.05);
+}
+
+/* Titles */
+.home-title {
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px black;
+    margin-top: 50px;
+    color: white;
+}
+
+.container {
+    width: 90%;
+    margin: 20px auto;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+}
+
+.nav-center a {
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+.nav-right a {
+    margin-left: 15px;
+}
+
+.welcome-text {
+    margin-right: 10px;
+}
