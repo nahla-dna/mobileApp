@@ -1,0 +1,10 @@
+{% extends 'rentals/base.html' %}
+{% block content %}
+
+<h2>Cancellation Not Allowed</h2>
+
+<p style="color: red;">{{ error }}</p>
+
+<a href="{% url 'my_bookings' %}">Back to My Bookings</a>
+
+{% endblock %}

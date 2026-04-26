@@ -1,0 +1,105 @@
+{% extends "rentals/base.html" %}
+{% block content %}
+
+<h2>Filter Villas</h2>
+
+<form id="filter-form">
+    <label>Location:</label>
+    <input type="text" name="location" id="location" placeholder="e.g. Le Morne">
+    <br><br>
+
+    <label>Minimum Price:</label>
+    <input type="number" name="min_price" id="min_price">
+
+    <label>Maximum Price:</label>
+    <input type="number" name="max_price" id="max_price">
+    <br><br>
+
+    <label>Min Rooms:</label>
+    <input type="number" name="rooms" id="rooms" min="1">
+
+    <label>Max Guests:</label>
+    <input type="number" name="guests" id="guests" min="1">
+    <br><br>
+
+    <label>Featured Only:</label>
+    <select name="featured" id="featured">
+        <option value="">No</option>
+        <option value="yes">Yes</option>
+    </select>
+    <br><br>
+
+    <button type="submit">Apply Filters</button>
+</form>
+
+<hr>
+<h2>Results</h2>
+<div id="loading" style="display:none;">Searching...</div>
+<div id="results-container"></div>
+
+<!-- jQuery from CDN -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script>
+    // Helper to build one villa card as HTML
+    function buildCard(v) {
+        var img = v.image
+            ? '<img src="' + v.image + '" width="220"><br>'
+            : '';
+
+        var bookBtn = '{% if user.is_authenticated %}'
+            ? '<a href="/villa/' + v.id + '/book/"><button>Book Now</button></a>'
+            : '<a href="/login/"><button>Login to Book</button></a>';
+
+        return '<div class="villa-card">' +
+            img +
+            '<h3>' + v.name + '</h3>' +
+            '<p>' + v.location + '</p>' +
+            '<p>Rs ' + v.price_per_night + ' / night</p>' +
+            '<a href="/villa/' + v.id + '/">View Details</a> ' +
+            bookBtn +
+            '</div><hr>';
+    }
+
+    // Fire AJAX when form is submitted
+    $('#filter-form').on('submit', function(e) {
+        e.preventDefault();  // stop full page reload
+
+        var params = {
+            location: $('#location').val(),
+            min_price: $('#min_price').val(),
+            max_price: $('#max_price').val(),
+            rooms: $('#rooms').val(),
+            guests: $('#guests').val(),
+            featured: $('#featured').val()
+        };
+
+        $('#loading').show();
+        $('#results-container').empty();
+
+        $.ajax({
+            url: '/api/search/',
+            method: 'GET',
+            data: params,
+            success: function(data) {
+                $('#loading').hide();
+
+                if (data.length === 0) {
+                    $('#results-container').html('<p>No villas match the selected filters.</p>');
+                    return;
+                }
+
+                // Loop through JSON response and build cards
+                $.each(data, function(index, villa) {
+                    $('#results-container').append(buildCard(villa));
+                });
+            },
+            error: function() {
+                $('#loading').hide();
+                $('#results-container').html('<p>Something went wrong. Please try again.</p>');
+            }
+        });
+    });
+</script>
+
+{% endblock %}
