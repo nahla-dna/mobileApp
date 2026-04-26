@@ -1,0 +1,16 @@
+{% extends "rentals/base.html" %}
+
+{% block content %}
+<h2>Payment Page</h2>
+
+<p>Villa: {{ booking.villa.name }}</p>
+<p>Dates: {{ booking.start_date }} → {{ booking.end_date }}</p>
+<p>Nights: {{ nights }}</p>
+<p>Total: Rs {{ total_price }}</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit">💳 Pay Now</button>
+</form>
+
+{% endblock %}

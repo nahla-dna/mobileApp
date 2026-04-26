@@ -1,0 +1,64 @@
+{% extends "rentals/base.html" %}
+{% block content %}
+
+<h2>Filter Villas</h2>
+
+<form method="get">
+
+    <label>Location:</label>
+    <input type="text" name="location" placeholder="e.g. Le Morne">
+
+    <br><br>
+
+    <label>Minimum Price:</label>
+    <input type="number" name="min_price">
+
+    <label>Maximum Price:</label>
+    <input type="number" name="max_price">
+
+    <br><br>
+
+    <label>Min Rooms:</label>
+    <input type="number" name="rooms" min="1">
+
+    <label>Max Guests:</label>
+    <input type="number" name="guests" min="1">
+
+    <br><br>
+
+    <label>Featured Only:</label>
+    <select name="featured">
+        <option value="">No</option>
+        <option value="yes">Yes</option>
+    </select>
+
+    <br><br>
+
+    <button type="submit">Apply Filters</button>
+</form>
+
+<hr>
+
+<h2>Results</h2>
+
+{% if villas %}
+    {% for v in villas %}
+        <div class="villa-card">
+            <h3>{{ v.name }}</h3>
+            <p>{{ v.location }}</p>
+            <p>Rs {{ v.price_per_night }}</p>
+
+            {% if v.main_image %}
+                <img src="{{ v.main_image.url }}" width="220">
+            {% endif %}
+
+            <br>
+            <a href="{% url 'villa_detail' v.id %}">View Details</a>
+        </div>
+        <hr>
+    {% endfor %}
+{% else %}
+    <p>No villas match the selected filters.</p>
+{% endif %}
+
+{% endblock %}

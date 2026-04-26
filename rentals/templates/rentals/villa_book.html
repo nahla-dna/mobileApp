@@ -1,0 +1,17 @@
+{% extends 'rentals/base.html' %}
+{% block content %}
+
+<h2>Book {{ villa.name }}</h2>
+
+<p><strong>Location:</strong> {{ villa.location }}</p>
+<p><strong>Price per night:</strong> Rs {{ villa.price_per_night }}</p>
+<p><strong>Max guests:</strong> {{ villa.max_guests }}</p>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit" class="btn btn-success">Confirm Booking</button>
+</form>
+
+{% endblock %}

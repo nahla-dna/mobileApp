@@ -1,0 +1,16 @@
+{% extends "rentals/base.html" %}
+
+{% block content %}
+
+<h1>Frequently Asked Questions</h1>
+
+<div style="max-width: 800px; margin: 20px auto;">
+    {% for f in faqs %}
+        <div style="padding: 15px; border-bottom: 1px solid #ccc;">
+            <h3 style="margin-bottom: 8px;">{{ f.question }}</h3>
+            <p style="color: #1500fd;">{{ f.answer }}</p>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

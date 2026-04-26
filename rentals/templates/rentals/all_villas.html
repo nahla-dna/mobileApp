@@ -1,0 +1,69 @@
+{% extends 'rentals/base.html' %}
+{% block content %}
+
+<h2>All Villas</h2>
+
+{% if villas %}
+    {% for v in villas %}
+        <div class="villa-card">
+            <h3>{{ v.name }}</h3>
+            <p><strong>Location:</strong> {{ v.location }}</p>
+            <p><strong>Price per night:</strong> Rs {{ v.price_per_night }}</p>
+
+            {% if v.main_image %}
+                <img src="{{ v.main_image.url }}" width="250" style="border-radius: 8px;">
+            {% endif %}
+
+            <br><br>
+
+            <!-- View Details Button -->
+            <a href="{% url 'villa_detail' v.id %}" class="btn-view">View Details</a>
+
+            <!-- Book Now Button -->
+            <a href="{% url 'book_villa' v.id %}" class="btn-book">Book Now</a>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No villas available.</p>
+{% endif %}
+
+
+<style>
+.villa-card {
+    background: rgba(255, 255, 255, 0.89);
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 10px;
+    width: 300px;
+}
+
+.btn-view {
+    display: inline-block;
+    padding: 8px 15px;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    margin-right: 10px;
+}
+
+.btn-view:hover {
+    background: #0056b3;
+}
+
+.btn-book {
+    display: inline-block;
+    padding: 8px 15px;
+    background: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.btn-book:hover {
+    background: #1e7e34;
+}
+</style>
+
+{% endblock %}
+
