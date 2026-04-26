@@ -1,5 +1,6 @@
 ================================================================
-TEAM MEMBER CONTRIBUTION — [YOUR NAME]
+TEAM MEMBER CONTRIBUTION — Akash Beedaysee
+Student ID:2315011
 Javan Rentals Project — Semester 2
 ================================================================
 
@@ -27,7 +28,7 @@ Specifically I worked on:
   bug where the cursor would jump back to the first input field
   on every keystroke
 
-- Added window_resizable support to the mobile app
+- Added window_resizable support to the mobile app(might not be fully functional)
 
 - Demonstrated full CRUD operations via Django REST Framework
   (Create, Read, Update, Delete) on the Villa model
@@ -52,7 +53,6 @@ FILE 2: rentals/views.py
 FILE 3: rentals/urls.py
   - path('api/search/', views.ajax_search, name='ajax_search')
   - Added at the bottom of the urlpatterns list
-
 
 ----------------------------------------------------------------
 3. HOW TO SET UP AND RUN THE PROJECT
