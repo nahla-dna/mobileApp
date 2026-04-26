@@ -1,0 +1,15 @@
+TEAM MEMBER CONTRIBUTION — Ashmit LAKAN
+Student ID:2310758
+Javan Rentals Project — Semester 2
+
+files: booking, payment and payment confirmation.
+
+In this part of the project, I was responsible for designing and implementing two connected Django templates: the bookings page and the payment page.
+
+For the bookings page, I created a dynamic interface that retrieves booking data from the backend and displays it in a structured card layout using Django template tags such as {% if %} and {% for %}. I also added custom CSS styling to improve the user interface, including responsive card designs, image handling, and interactive elements like a cancel booking button. Additionally, I ensured that relevant booking details—such as villa name, location, dates, pricing, and guest information are clearly presented to the user.
+
+For the payment page, I developed a simple but functional template that summarizes booking details, calculates the number of nights and total cost (passed from the backend), and includes a secure POST form with Cross-Site Request Forgery (CSRF) protection to handle payment submission. I also contributed a small but important feature that displays a booking confirmation message after a successful payment, providing clear feedback to the user that their booking has been completed.
+
+I further improved the structure and best practices of the code by identifying areas for refinement, such as separating CSS into reusable files and recommending the use of POST requests for sensitive actions like booking cancellation.
+
+Overall, my contribution focused on both frontend presentation and proper integration with Django’s templating system and user interaction flow.
