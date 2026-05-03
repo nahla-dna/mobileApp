@@ -239,7 +239,7 @@ def main(page: ft.Page):
         dialog.open = True
         page.update()
 
-    # ---------------- CONTACT (UPDATED 🔥) ----------------
+    # ---------------- CONTACT ----------------
     def contact_page():
         name = ft.TextField(label="Name")
         email = ft.TextField(label="Email", value=current_user["email"] or "")
